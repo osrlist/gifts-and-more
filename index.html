@@ -1,1 +1,265 @@
-Hello World
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	
+  <title>Подарки и не только...</title>
+  <style>
+    html {
+      font-size: 16px; /* Устанавливаем базовый размер шрифта */
+    }
+	
+    body {
+      font-family: sans-serif;
+      /*margin: 20px; */
+      margin: 0;  
+	  font-size: 1 rem;
+	  background-image: linear-gradient(90deg, rgba(101, 157, 219, 1), rgba(255, 255, 255, 0));  /* Прозрачный красный -> непрозрачный красный */
+    }
+
+    /* Фиксированный хедер */
+    .header {
+      background-color: #daad86;
+      padding: 10px;
+      text-align: center;
+/*      position: fixed; /* Фиксированное положение */ */
+      top: 0;          /* Прилипает к верху окна */
+      left: 0;
+      width: 100%;      /* Растягивается на всю ширину */
+      z-index: 100;     /* Отображается поверх остального контента */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Небольшая тень */
+    }
+	
+    .header img {
+      height: 40px;
+	  width: auto;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    .header h1 {
+      display: inline-block;
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+	
+    /* Контейнер для контента, чтобы не накладывался на хедер */
+    .content {
+       max-width: 700px;
+       margin: 0 auto; /* Центрирует блок по горизонтали */	
+       padding-top: 10px; /* Высота хедера + небольшой отступ */
+    }
+	
+    /* Строка с картинкой и текстом */
+    .row {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      /*border-bottom: 1px solid #eee; /* Разделительная линия */ */
+    }
+
+	.text-block {
+	  display: flex;
+	  flex-direction: column; /* располагаем абзацы вертикально */
+	  gap: 10px; /* расстояние между абзацами */
+	}
+
+    .row img {
+      width: 200px; /* Ширина картинки */
+      height: auto; /* Автоматическая высота, сохранение пропорций */
+      object-fit: cover; /* Обрезает изображение, чтобы соответствовало размерам */
+      margin-right: 20px;
+	  cursor: pointer;	  
+    }
+
+    .row p {
+      margin: 0;
+    }
+
+    .rowleft {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+	
+    .rowleft img {
+      width: 200px; /* Ширина картинки */
+      height: auto; /* Автоматическая высота, сохранение пропорций */
+      object-fit: cover; /* Обрезает изображение, чтобы соответствовало размерам */
+      margin-left: 20px;
+	  cursor: pointer;
+    }
+
+    .rowleft p {
+      margin: 0;
+    }
+
+/*
+    img {
+      float: left; /* Обтекание слева */
+      margin-right: 20px; /* Отступ справа от картинки */
+      width: 200px; /* Ширина картинки */
+      height: auto; /* Автоматическая высота, сохранение пропорций */
+    }
+*/
+    p {
+      text-align: justify; /* Выравнивание текста по ширине */
+	  font-size: 1.2rem; /* 1.2rem = 19.2px */
+    }
+	
+	.img-icon {
+        width: auto;
+        height: 20px;
+        vertical-align: middle; /* Выравниваем по вертикали относительно текста */
+        margin-right: 1px; /* Отступ справа */
+    }
+	
+	#modalContainer {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1000;
+	}
+
+	#modalContent {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		text-align: center; /* Центрирование содержимого */
+        width: 90%; /* Установите желаемую ширину */
+        height: 90%; /* Установите желаемую высоту */		
+	}
+
+	#modalImage {
+		max-width: 90%;
+		max-height: 90%;
+	}
+
+	#closeModalButton {
+		margin-top: 10px;
+		padding: 5px 10px;
+		cursor: pointer;
+	}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <img src="img/logo.png" alt="Логотип"> 
+    <h1><strong>Полезные мелочи с душой. </strong>Гравировка по вашему заказу.</h1>
+  </div>
+
+  <div class="content">
+
+      <div class="row">
+		  <img src="img/heard.png" alt="Сердце" id="heard"> 
+		  <p>Вы хотите подарить уникальный подарок своим близким, любимым. Напомнить о каких-то моментах, о которых знаете только Вы и Ваши близкие.</p>
+     </div>
+	 
+      <div class="rowleft">
+	      <p>Возможно, Вы хотите украсить офис, создать уникальную атмосферу. Сделать подарки своим коллегам. Придать Вашему ресторану изюминку.</p>
+		  <img src="img/pizza.png" alt="Пицца" id="pizza">
+     </div>
+	
+      <div class="row">
+		  <img src="img/cast.png" alt="Дворец" id="cast">
+		   <div class="text-block">
+			  <p>Тогда вы попали по адресу!</p>
+			  <p>Закажите подставку под кружку из пробки с уникальным текстом, картинкой.</p>
+			  <p>Пробка - экологичный материал, который прослужит долго и не боится воды.</p>
+			</div> 
+	  </div>
+
+      <div class="rowleft">
+		   <div class="text-block">
+				  <p><strong>ДЛЯ ЗАКАЗА:</strong> Просто пришлите картинку в Телеграмм, WhatsApp или на электронную почту.</p>
+				  <p>Доставка возможна транспортной компанией.</p>
+				  <p>Стоимость от 200р за подставку. Размер подставки 95*95*5 mm.</p>
+				  <p>Стоимость доставки оплачивается отдельно</p>
+			</div> 
+		  <img src="img/cat.png" alt="Кошечка" id="catImage">
+	  </div>
+	  
+	  <div class="text-block">
+		  <a href="https://wa.me/79538881747?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%21%20%D1%85%D0%BE%D1%87%D1%83%20%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%20%D0%BD%D0%B0%20%D0%B3%D1%80%D0%B0%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D1%83%20%D0%BF%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE" target="_blank">
+		   <img src="img/whatsApp.png" alt="WhatsApp"  class="img-icon"> 
+		   Написать в WhatsApp
+		  </a>
+		  
+		  <a href="https://t.me/79538881747" target="_blank">
+				<img src="img/telegram.png" alt="Telegram" class="img-icon"> Написать в Telegram
+		 </a>
+		 
+		<a href="mailto:osr@list.ru?subject=Запрос на гравировку по фото&body=Здравствуйте,%0A%0AЯ хотел(а) бы заказать гравировку по фото.">
+			 <img src="img/email.png" alt="email" class="img-icon">Написать письмо osr@list.ru
+		</a>		 
+	  </div>
+ </div>
+ 
+ <div id="modalContainer">
+  <div id="modalContent">
+    <img id="modalImage" src="" alt="Большое сердце">
+    <button id="closeModalButton">Закрыть</button>
+  </div>
+</div>
+
+ 	<script>
+	const catImage = document.getElementById('catImage');
+	const pizza = document.getElementById('pizza');
+	const cast = document.getElementById('cast');
+	const heard = document.getElementById('heard');
+	
+	const modalContainer = document.getElementById('modalContainer');
+	const modalImage = document.getElementById('modalImage');
+	const closeModalButton = document.getElementById('closeModalButton');
+
+	catImage.addEventListener('click', function() {
+	  modalImage.src = 'img/cat_source.png';
+	  modalContainer.style.display = 'block';
+	});
+	
+	pizza.addEventListener('click', function() {
+	  modalImage.src = 'img/pizza_source.png';
+	  modalContainer.style.display = 'block';
+	});
+
+	cast.addEventListener('click', function() {
+	  modalImage.src = 'img/cast_source.png';
+	  modalContainer.style.display = 'block';
+	});
+
+	heard.addEventListener('click', function() {
+	  modalImage.src = 'img/heard_source.png';
+	  modalContainer.style.display = 'block';
+	});
+
+
+	closeModalButton.addEventListener('click', function() {
+	  modalContainer.style.display = 'none';
+	});
+
+	modalContainer.addEventListener('click', function(event) {
+	  if (event.target === modalContainer) {
+		modalContainer.style.display = 'none';
+	  }
+	});
+
+	document.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape' || event.keyCode === 27) {
+			modalContainer.style.display = 'none';
+		}
+	});
+	</script>
+
+</body>
+</html>
