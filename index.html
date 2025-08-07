@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<link rel="icon" href="img/bezier.png" type="image/png">
+	
 	
   <title>Подарки и не только...</title>
   <style>
@@ -67,12 +69,19 @@
 	  gap: 10px; /* расстояние между абзацами */
 	}
 
-    .row img {
+    .row img:not(.stat-img) {
       width: 200px; /* Ширина картинки */
       height: auto; /* Автоматическая высота, сохранение пропорций */
       object-fit: cover; /* Обрезает изображение, чтобы соответствовало размерам */
       margin-right: 20px;
 	  cursor: pointer;	  
+    }
+
+    .stat-img {
+      width: 200px; /* Ширина картинки */
+      height: auto; /* Автоматическая высота, сохранение пропорций */
+      object-fit: cover; /* Обрезает изображение, чтобы соответствовало размерам */
+      margin-right: 20px;
     }
 
     .row p {
@@ -97,14 +106,7 @@
       margin: 0;
     }
 
-/*
-    img {
-      float: left; /* Обтекание слева */
-      margin-right: 20px; /* Отступ справа от картинки */
-      width: 200px; /* Ширина картинки */
-      height: auto; /* Автоматическая высота, сохранение пропорций */
-    }
-*/
+
     p {
       text-align: justify; /* Выравнивание текста по ширине */
 	  font-size: 1.2rem; /* 1.2rem = 19.2px */
@@ -160,9 +162,8 @@
   </div>
 
   <div class="content">
-
       <div class="row">
-		  <img src="img/heard.png" alt="Сердце" id="heard"> 
+		  <img  class="stat-img" src="img/box.jpg" alt="Упаковка" id="box"> 
 		  <p>Вы хотите подарить уникальный подарок своим близким, любимым. Напомнить о каких-то моментах, о которых знаете только Вы и Ваши близкие.</p>
      </div>
 	 
@@ -218,7 +219,6 @@
 	const catImage = document.getElementById('catImage');
 	const pizza = document.getElementById('pizza');
 	const cast = document.getElementById('cast');
-	const heard = document.getElementById('heard');
 	
 	const modalContainer = document.getElementById('modalContainer');
 	const modalImage = document.getElementById('modalImage');
@@ -236,11 +236,6 @@
 
 	cast.addEventListener('click', function() {
 	  modalImage.src = 'img/cast_source.png';
-	  modalContainer.style.display = 'block';
-	});
-
-	heard.addEventListener('click', function() {
-	  modalImage.src = 'img/heard_source.png';
 	  modalContainer.style.display = 'block';
 	});
 
